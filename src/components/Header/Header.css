@@ -17,3 +17,7 @@
 .Header a:hover{
    color: yellowgreen;
 }
+
+.btn-logout{
+margin-left: 10px;
+}
