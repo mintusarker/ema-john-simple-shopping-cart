@@ -7,16 +7,16 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 
 
 const Orders = () => {
-    const {products, initialCart} = useLoaderData();
-    const [cart , setCart] = useState(initialCart);
-   
-     const handleRemoveItem = (id) =>{
-        const reaming = cart.filter(product => product.id !== id)
+    const { products, initialCart } = useLoaderData();
+    const [cart, setCart] = useState(initialCart);
+
+    const handleRemoveItem = (id) => {
+        const reaming = cart.filter(product => product._id !== id)
         setCart(reaming);
         removeFromDb(id);
-     }
+    }
 
-     
+
     const clearCart = () => {
         setCart([]);
         deleteShoppingCart()
@@ -24,27 +24,27 @@ const Orders = () => {
 
     return (
         <div className='shop-container'>
-           <div className='orders-container'>
-            {
-                cart.map(product => <ReviewItem 
-                key = {product.id}
-                product = {product}
-                handleRemoveItem = {handleRemoveItem}
-                ></ReviewItem>)
-            }
+            <div className='orders-container'>
+                {
+                    cart.map(product => <ReviewItem
+                        key={product._id}
+                        product={product}
+                        handleRemoveItem={handleRemoveItem}
+                    ></ReviewItem>)
+                }
 
-            {
-                cart.length === 0 && <h2>No Items for Review. Please shop <Link to={'/'}>Shop More</Link></h2>
-            }
+                {
+                    cart.length === 0 && <h2>No Items for Review. Please shop <Link to={'/'}>Shop More</Link></h2>
+                }
 
-           </div>
-           <div className='cart-container'>
-            <Cart clearCart = {clearCart} cart ={cart}>
-                <Link to='/shipping'><button>Proceed Shipping</button></Link>
-            </Cart>
-           </div>
-            
-            
+            </div>
+            <div className='cart-container'>
+                <Cart clearCart={clearCart} cart={cart}>
+                    <Link to='/shipping'><button>Proceed Shipping</button></Link>
+                </Cart>
+            </div>
+
+
         </div>
     );
 };
